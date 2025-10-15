@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Controle Dino</title>
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+</head>
+<body>
+  <h2>Controle Dino</h2>
+  <button id="jump">PULAR</button>
+
+  <script>
+    const playerNumber = prompt("Você é o jogador 1 ou 2?");
+    const peer = new Peer();
+    let conn;
+
+    peer.on('open', id => {
+      conn = peer.connect('host123');
+      conn.on('open', () => {
+        conn.send({ player: Number(playerNumber), input: null });
+        document.getElementById('jump').onclick = () => {
+          conn.send({ player: Number(playerNumber), input: 'jump' });
+        };
+      });
+    });
+  </script>
+</body>
+</html>
