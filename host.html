@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Jogo Dino Multiplayer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Host Dino</title>
   <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
   <style>
-    svg { background: #eee; display: block; margin: auto; }
-    .dino { fill: green; }
-    .dino2 { fill: blue; }
-    .obstacle { fill: red; }
+    body {
+      margin: 0;
+      background: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    svg {
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      background: #fff;
+      border: 2px solid #333;
+    }
+    .dino1 { fill: #4CAF50; }
+    .dino2 { fill: #2196F3; }
+    .obstacle { fill: #FF5722; }
+    .ground { fill: #A1887F; }
   </style>
 </head>
 <body>
-  <svg id="game" width="600" height="200">
-    <rect id="dino1" class="dino" x="50" y="150" width="20" height="20" />
-    <rect id="dino2" class="dino2" x="100" y="150" width="20" height="20" />
-    <rect id="obstacle" class="obstacle" x="600" y="150" width="20" height="20" />
+  <svg id="game" viewBox="0 0 700 200" preserveAspectRatio="xMidYMid meet">
+    <rect class="ground" x="0" y="170" width="700" height="30" />
+    <circle id="dino1" class="dino1" cx="70" cy="160" r="15" />
+    <circle id="dino2" class="dino2" cx="130" cy="160" r="15" />
+    <rect id="obstacle" class="obstacle" x="700" y="155" width="20" height="20" />
   </svg>
 
   <script>
@@ -36,16 +54,15 @@
     function jump(playerId) {
       const dino = dinos[playerId];
       if (!dino) return;
-      dino.setAttribute('y', '100');
-      setTimeout(() => dino.setAttribute('y', '150'), 500);
+      dino.setAttribute('cy', '110');
+      setTimeout(() => dino.setAttribute('cy', '160'), 500);
     }
 
-    // Obstáculo se move
     const obstacle = document.getElementById('obstacle');
     setInterval(() => {
       let x = parseInt(obstacle.getAttribute('x'));
       x -= 5;
-      if (x < -20) x = 600;
+      if (x < -20) x = 700;
       obstacle.setAttribute('x', x);
     }, 50);
   </script>
