@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Escolha o modo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dino Multiplayer</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      background: #f0f0f0;
-      margin-top: 100px;
+      background: linear-gradient(to bottom, #f0f8ff, #d0e8ff);
+      padding: 50px 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
     }
     button {
-      font-size: 20px;
+      font-size: 1.2em;
       padding: 15px 30px;
-      margin: 20px;
-      cursor: pointer;
+      margin: 15px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background-color: #4CAF50;
       color: white;
+      width: 80%;
+      max-width: 300px;
     }
     button:hover {
       background-color: #45a049;
@@ -25,8 +32,8 @@
   </style>
 </head>
 <body>
-  <h1>Bem-vindo ao Dino Multiplayer 🦖</h1>
-  <p>Escolha como você quer jogar:</p>
+  <h1>🦖 Dino Multiplayer</h1>
+  <p>Escolha como deseja jogar:</p>
   <button onclick="location.href='host.html'">🎮 Host do Jogo</button>
   <button onclick="location.href='controle.html'">📱 Controle Remoto</button>
 </body>
