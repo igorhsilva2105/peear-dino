@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jogo Dino Multiplayer</title>
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <style>
+    svg { background: #eee; display: block; margin: auto; }
+    .dino { fill: green; }
+    .dino2 { fill: blue; }
+    .obstacle { fill: red; }
+  </style>
+</head>
+<body>
+  <svg id="game" width="600" height="200">
+    <rect id="dino1" class="dino" x="50" y="150" width="20" height="20" />
+    <rect id="dino2" class="dino2" x="100" y="150" width="20" height="20" />
+    <rect id="obstacle" class="obstacle" x="600" y="150" width="20" height="20" />
+  </svg>
+
+  <script>
+    const peer = new Peer('host123');
+    const players = {};
+    const dinos = {
+      1: document.getElementById('dino1'),
+      2: document.getElementById('dino2')
+    };
+
+    peer.on('connection', conn => {
+      conn.on('data', data => {
+        if (!players[conn.peer]) players[conn.peer] = data.player;
+        const playerId = players[conn.peer];
+        if (data.input === 'jump') jump(playerId);
+      });
+    });
+
+    function jump(playerId) {
+      const dino = dinos[playerId];
+      if (!dino) return;
+      dino.setAttribute('y', '100');
+      setTimeout(() => dino.setAttribute('y', '150'), 500);
+    }
+
+    // Obstáculo se move
+    const obstacle = document.getElementById('obstacle');
+    setInterval(() => {
+      let x = parseInt(obstacle.getAttribute('x'));
+      x -= 5;
+      if (x < -20) x = 600;
+      obstacle.setAttribute('x', x);
+    }, 50);
+  </script>
+</body>
+</html>
